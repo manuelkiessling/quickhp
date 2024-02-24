@@ -1,0 +1,12 @@
+<previewroot>html</previewroot>
+<validsuffix>html</validsuffix>
+<transitionalsuffix>html</transitionalsuffix>
+<dynamicsuffix>php</dynamicsuffix>
+<targethttproot>http://www.domain.com</targethttproot>
+<parsescript>http://username:password@www.domain.com/admin/quickhp/parse.php</parsescript>
+<trimrootpath>0</trimrootpath>
+
+<targetserver_ftp1>ftp.yourserver.com</targetserver_ftp1>
+<targetuser_ftp1>ftpuser</targetuser_ftp1>
+<targetpassword_ftp1>ftppassword</targetpassword_ftp1>
+<targetroot_ftp1>/</targetroot_ftp1>

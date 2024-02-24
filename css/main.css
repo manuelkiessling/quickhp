@@ -1,0 +1,78 @@
+body
+{
+ font-family:Verdana,Arial,sans-serif;
+ color:#000000;
+}
+
+.filelist-head
+{
+ font-size:80%;
+ font-family:Verdana,Arial,sans-serif;
+ color:#FFFFFF;
+ background-color:#000000;
+}
+
+.filelist-row-light
+{
+ font-size:80%;
+ font-family:Verdana,Arial,sans-serif;
+ color:#000000;
+ background-color:#EEEEEE;
+}
+
+.filelist-row-dark
+{
+ font-size:80%;
+ font-family:Verdana,Arial,sans-serif;
+ color:#000000;
+ background-color:#DDDDDD;
+}
+
+a.light
+{
+ color:#FFFFFF;
+}
+
+.tab
+{
+ border-spacing:0px;
+}
+
+.tab-head
+{
+ font-size:80%;
+ font-family:Verdana,Arial,sans-serif;
+ font-weight:bold;
+ color:#FFFFFF;
+ background-color:#444444;
+}
+
+.tab-body
+{
+ font-size:80%;
+ font-family:Verdana,Arial,sans-serif;
+ color:#000000;
+ background-color:#EEEEEE;
+}
+
+.tab-foot
+{
+ text-align:right;
+ background-color:#DDDDDD;
+}
+
+input
+{
+ background-color:#FFFBEC;
+}
+
+select
+{
+ background-color:#FFFBEC;
+}
+
+.error
+{
+ font-weight:bolder;
+ color:#FF0000;
+}

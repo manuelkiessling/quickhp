@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsl:stylesheet
+  version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output
+ method="html"
+ media-type="text/html"
+ doctype-public="-//W3C//DTD HTML 4.0 Transitional//EN"
+ indent="yes"
+ encoding="iso-8859-1"
+/>
+
+<xsl:template match="/">
+<html>
+ <head>
+  <title><xsl:value-of select="/qp_document@title"/></title>
+ </head>
+ <body bgcolor="#FFFFFF">
+  <xsl:value-of select="/qp_document/qp_user_variables@description"/>
+  <br/>
+  <br/>
+  <xsl:apply-templates/>
+ </body>
+</html>
+</xsl:template>
+
+<xsl:template match="/qp_content0">
+ <!-- document content starts here -->
+ <xsl:apply-templates/>
+ <!-- document content ends here -->
+</xsl:template>
+
+<!-- The templates -->
+
+<xsl:template match="headline">
+ <h1>
+  <xsl:apply-templates/>
+ </h1>
+</xsl:template>
+
+<xsl:template match="important">
+ <b>
+  <xsl:apply-templates/>
+ </b>
+</xsl:template>
+
+<xsl:template match="para">
+ <br/>
+ <br/>
+</xsl:template>
+
+<xsl:template match="code">
+ <pre>
+  <xsl:apply-templates/>
+ </pre>
+</xsl:template>
+
+<xsl:template match="link">
+<a>
+ <xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
+ <xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute>
+ <xsl:choose>
+  <xsl:when test="starts-with(@href, 'http://www.yourdomain.com')">
+  </xsl:when>
+  <xsl:otherwise>
+   <xsl:if test="starts-with(@href, 'http://')">
+    [ext]
+   </xsl:if>
+   <xsl:if test="starts-with(@href, 'mailto:')">
+    [mail]
+   </xsl:if>
+  </xsl:otherwise>
+ </xsl:choose>
+ <xsl:apply-templates/>
+</a>
+</xsl:template>
+
+</xsl:stylesheet>

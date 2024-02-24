@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<qp_document
+ title="Example for a dynamic QuickHP XML file"
+>
+<qp_system_variables
+ date_created="2002/05/13"
+ time_created="13:01:42"
+ date_updated="2002/05/13"
+ time_updated="13:03:53"
+ editor_name="Manuel Kiessling"
+ editor_mail="manuel@kiessling.net"
+/>
+<qp_user_variables
+ subtitle="(An XML parser would not like this file as is, but he will like it when we read in the file via fopen [PHP] and it is therefore parsed and the PHP code spits out valid XML stuff!)"
+ language="en, english"
+ description="An example only"
+/>
+<qp_content0 descr="Main Content" qp_dummy=""><chapter>
+<?php echo "<headline>This is an example headline</headline>"; ?>
+Lorem ipsum etc.
+<para />
+<link href="http://manuel.kiessling.net">I am an external link containing the actual time: <?php echo date("H:i:s"); ?></link>
+<para />
+<link href="{qp_rootpath}">I am an internal link, always pointing to the root of the website</link>
+</chapter></qp_content0>
+</qp_document>

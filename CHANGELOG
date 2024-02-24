@@ -1,0 +1,51 @@
+QuickHP Changelog
+
+- Version 0.3
+  2002-05-23
+
+  - True XML and XSLT support
+  - Files are written using FTP, allows to change them not only
+    via QuickHP
+  - Huge improvements on the UI
+  - Better XML format: multiple content fields supported
+  - Multiple users with different access supported
+  - Parsing changed files only supported
+  - Parsing current directory only supported
+  - Search
+  - Search and replace
+  - File History
+  - Many many smaller bugfixes and improvements
+
+
+- Version 0.2
+  2001-06-04
+
+  - QuickHP is now a minimalistic webbased homepage administrator based
+    on PHP
+
+
+- Version 0.1
+  2001-02-27
+
+  - added support for user defined qhp tags via qvars-file
+  - added support for user defined qhp tags via inline definitions
+
+
+- Version 0.03
+  2001-02-24
+
+  - QuickHP is now licenced under the GNU General Public Licence
+
+
+- Version 0.02
+  2001-02-21
+  
+  - cleaned up the code
+  - added support for <!--qhp#root--> tag
+  - changed dirnames
+
+
+- Version 0.01
+  2001-02-15
+  
+  - QuickHP's first release

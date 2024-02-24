@@ -1,0 +1,14 @@
+<?php
+
+if ($qp_parser_active <> "1")
+{
+ $qp_open_string = str_replace("qp_parser_active=0", "qp_parser_active=1", "{script}?template={template}&qp_root=".urlencode("{root}")."&qp_file=".urlencode("http://".getenv("HTTP_HOST").$PHP_SELF."?qp_parser_active=1&qp_request_uri=".$REQUEST_URI."&qp_http_referer=".$HTTP_REFERER."&".$QUERY_STRING));
+ $fp = fopen($qp_open_string, "r");
+ $content = fread($fp, 9999999);
+ echo $content;
+}
+else
+{
+ ?>{content}<?php
+}
+?>

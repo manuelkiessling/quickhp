@@ -1,0 +1,223 @@
+QuickHP - A minimalistic webbased homepage administrator
+=======================================================================
+Version 0.3 - 2002-05-23 - Thank you for using QuickHP!
+Copyright (C) 2001, 2002 Manuel Kiessling
+=======================================================================
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307,
+USA.
+
+=======================================================================
+Due to the fact that my mother language is not english, it is possible
+or better very probably that there are several mistakes - I hope they
+are at least funny... if you find one, then please send me an eMail to
+manuel@kiessling.net. Thank you very much!
+=======================================================================
+
+
+Requirements:
+-------------
+
+You need a webserver that supports PHP version 4.1.2 with full FTP,
+XML and XSLT (Sablotron) support. Later versions should work, but I
+did not test this.
+Get PHP 4.1.2 here:
+http://www.alltheweb.com/search?cat=ftp&ftype=6&query=php-4.1.2.tar.gz
+
+My php configure line looks like this:
+./configure --with-apxs=/usr/local/apache/current/bin/apxs
+            --with-mysql=/usr/local/mysql/current
+            --enable-ftp --with-xml
+            --enable-magic-quotes
+            --enable-xslt --with-xslt-sablot
+
+At least this is the part of the configure line that is needed
+to get QuickHP running - more options are no problem of course.
+
+You need MySQL:
+http://www.mysql.com
+
+
+Installation:
+-------------
+
+Extract the archive.
+
+Now ftp-copy the files on your webserver. Let's assume your homepage
+is located at http://www.domain.com/
+then put the files e.g. beneath http://www.domain.com/admin/
+
+It is important that you ftp-copy the files with the same ftp-user which
+you will allow access to the userdata files later!
+
+You must create a directory called 'tmp', and it must be located directly
+beneath the 'admin' directory so you then have
+http://www.domain.com/admin/tmp
+
+'chmod' this directory to 777.
+
+Now secure the directory admin with .htaccess or sort of, so only you
+have access to it.
+
+Add a new table to one of your MySQL databases by using the install.sql
+file you will find in the root directory of the extracted archive.
+
+It is a really good idea to change the password in the table afterwards!
+
+Open the config.inc.php file in the same directory with your favorite
+editor and change the lines 24 to 27 so they fit your FTP settings;
+remember that QuickHP must use the same FTP user that you used to copy
+the QuickHP files onto the server!
+
+Change the lines 32 and 33 so they fit your MySQL settings.
+
+In your browser, open this adress:
+
+http://www.domain.com/admin/
+
+Log in with the credentials that are saved in the MySQL table.
+
+You see the directory listing of the directory 'userdata', and you should
+see 2 directories called 'templates' and 'input'. You should now create a
+new directory with the browse tool, not with your ftp program. Go to the
+form field "create new directory:" and enter 'output', then hit
+'create'. You should now have these directories:
+
+http://www.domain.com/admin/userdata/templates
+http://www.domain.com/admin/userdata/input
+http://www.domain.com/admin/userdata/output
+
+so your browser should show something like this:
+
+Content of userdata/
+
+[input]
+[output]
+[templates]
+
+These are required to run QuickHP. You will create your XML files
+beneath 'input', and when you start parsing, preview files will be
+created from the 'input' files using the templates from the 'template'
+directory, and then copied to 'output', and if you go live they are
+ftp-copied from 'output' to the live system.
+
+I give you a basic example of how QuickHP works.
+
+First, you go to the directory 'input' (just click on the name).
+Then you create a new file 'index.xml' using the template
+'Standard'. After hitting 'create', you click on the link 'xml'
+in the 'Edit' column of the directory listing (you can also click on
+the filename instead). Then you see the xml file editor. Enter the
+appropriate values in the fields, enter some content (valid XML!),
+and hit 'Save file'.
+
+If now you click 'Start parsing', the following things will happen:
+
+The script opens one input file after the other and parses it through
+one of the template files, depending on the type of the input file
+(transitional, valid or dynamic) - the template files are located in
+the 'templates' folder and named 'valid_template.qpf' etc.
+If it is not one of the possible XML formats, it is simply copied.
+
+You can now browse to the 'output/html' folder and click on
+'index.html' to see the result.
+
+If in the parsing window you click 'Copy into system', the file
+
+http://www.domain.com/admin/userdata/output/html/index.html
+
+is copied to
+
+http://www.domain.com/index.html
+
+Before you are able to copy stuff into your 'live system' with
+QuickHP you will have to edit the file
+userdata/templates/html.qpt/config.qcf
+
+
+To get a basic idea how to handle the XML files, take a look at the
+three example files in the input folder.
+
+Except for the transitional XML files, where the content of the
+different fields is only copied to according placeholders defined in
+templates/html.qpt/transitional_template.qpf, the XML files are parsed
+via XSLT, as defined in templates/html.qpt/valid_template.qpt. After all,
+this is where the real work is done - by the XSLT extension of PHP, and
+not by QuickHP. Giving an introduction to XSL is really not possible in
+this README file - you will have to find other resources for this.
+
+The important point is that the valid and dynamic XML files must
+really contain _valid_ XML (or, in the case of the dynamic file, it
+may contain PHP code or whatever scripting language your server
+supports, but if opened via fopen, the server-parsed result
+must be valid then)!
+
+Maybe the best way to see how QuickHP works is to simply parse the
+example files in the input folder and then look at the result in the
+output folder, and also look at the template files. This should get
+you started.
+
+The thing to remember is that:
+
+- True static XML files that will result in true static HTML files
+  end on .xml and my contain only valid XML code
+
+- Dynamic XML files that will result in dynamic PHP (or sort of)
+  files end on .dxml and must contain valid XML code and/or the output
+  of possible PHP (or sort of) commands must be valid XML
+  (e.g. 'echo date("Y:m:d")."<br />";' is fine but
+  'echo date("Y:m:d")."<br>";' is not)
+
+- Transitional XML files end on .txml and may contain whatever code you
+  like (but only in the content fields, otherwise QuickHP cannot handle
+  them), but they are not parsed through the XSL template, their field
+  contents are only copied to the according placeholders in the
+  transitional template file.
+  
+
+Some more features:
+
+QuickHP has to placeholders you can use in your xml files:
+
+{qp_rootpath} always points to the root directory of all QuickHP
+input files. Example: If you have a file
+userdata/input/work/projects/index.xml (what will result in
+http://www.domain.com/work/projects/index.html) and you use this
+placeholder e.g. in a link like this:
+<a href="{qp_rootpath}">Go Home</a>
+then it will result in
+<a href="../../">Go Home</a>
+thus pointing to http://www.domain.com/, while you don't need
+to care about the consistency of this link, even if you move
+the file to another location later.
+
+Another placeholder is {qp_timestamp_parsed}, which will simply
+be replaced by the actual time in the moment the file is parsed.
+
+If you click on the link 'Hist', you will see a list of all versions
+that exist of a file (a new version is created every time you open a
+file), providing a cheap rollback solution.
+
+This should get you started; if you need further help feel free to email
+me. I am sorry there is no real documentation yet.
+
+
+The homepage of QuickHP is:
+http://www.kiessling.net/home/manuel/projects/software/quickhp/
+
+You are welcome to send in patches or take part in development.
+
+Manuel Kiessling
+manuel@kiessling.net

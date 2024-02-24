@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<qp_document
+ title=""
+>
+<qp_system_variables
+ date_created=""
+ time_created=""
+ date_updated=""
+ time_updated=""
+ editor_name=""
+ editor_mail=""
+/>
+<qp_user_variables
+ subtitle=""
+ language="en, english"
+ description=""
+/>
+<qp_content0 descr="Content" qp_dummy="">
+</qp_content0>
+</qp_document>

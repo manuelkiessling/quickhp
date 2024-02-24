@@ -1,0 +1,12 @@
+<html>
+ <head>
+  <title>{title}</title>
+ </head>
+ <body>
+  {qp_content0}
+  <hr>
+  {qp_content1}
+  <hr>
+  {qp_content2}
+ </body>
+</html>
